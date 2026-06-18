@@ -754,13 +754,6 @@ function openPaymentPage(planName, price) {
 dashPage.classList.add('hidden');
 document.getElementById('selected-plan-details').innerText = planName + " - ₹" + price;
 
-let cleanPlanName = "Regulatory 199 Plan";
-if(price === 249) cleanPlanName = "Regulatory 249 Plan";
-if(price === 499) cleanPlanName = "Regulatory 499 Plan";
-if(price === 999) cleanPlanName = "Regulatory 999 Plan";
-
-database.ref('users/' + currentLoggedInUser).update({ selectedPlan: cleanPlanName });
-
 const upiString = "upi://pay?pa=" + ADMIN_UPI_ID + "&pn=PredictionEngine&am=" + price;
 const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(upiString);
 
@@ -862,3 +855,4 @@ return '<tr class="border-b border-white/5">' +
 </script>
 </body>
 </html>
+
