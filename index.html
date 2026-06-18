@@ -122,14 +122,14 @@ box-shadow: 0 4px 15px rgba(34, 158, 217, 0.4);
 z-index: 2;
 }
 
-/* --- VIP PREMIUM NOTICE BOARD --- /
+/* --- VIP PREMIUM NOTICE BOARD --- */
 .notice-board {
 background: rgba(0, 0, 0, 0.65);
 border: 1px dashed rgba(255, 193, 7, 0.6);
 border-radius: 12px;
 padding: 12px;
 width: 100%;
-max-width: 360px; / Mobile width container alignment /
+max-width: 360px;
 margin: 0 auto 15px auto;
 overflow: hidden;
 white-space: nowrap;
@@ -144,7 +144,7 @@ font-size: 12.5px;
 color: #fff;
 font-weight: 500;
 letter-spacing: 0.5px;
-animation: marqueeSpeed 32s linear infinite; / Optimized speed for reading both languages smoothly */
+animation: marqueeSpeed 32s linear infinite;
 }
 .notice-text span.alert-tag {
 color: #ef4444;
@@ -396,14 +396,13 @@ border: 2px solid #fff;
 </div>
 </a>
 
-<h2 class="text-3xl mb-1 brand-title">MR. ANAND TRADER
-Starworldz trx</h2>
+<h2 class="text-3xl mb-1 brand-title">MR. ANAND TRADER<br>Starworldz trx</h2>
 <p class="text-white/70 font-mono text-xs uppercase tracking-widest mb-4">STASTARWORLDZ. COM 24/7 hours support available for you, so play confidently v4.0</p>
 
 <div class="notice-board">
 <div class="notice-text">
 <i class="fas fa-triangle-exclamation text-amber-400 mr-2"></i>
-<span class="alert-tag">Vip Warning:</span> Is game me bittiya jokhim (financial risk) shamil hai aur iski aadat lag sakti hai. Kripya apne jokhim aur zimmedari par khele. AI Predictions sirf patterns par kam karti hai, 100% profit ka koi dawa nahi hai. Kisi bhi payment ya hack load processing error ke liye turant contact kare: <span class="tg-tag">@mr_anand_treader</span>   |  
+<span class="alert-tag">Vip Warning:</span> Is game me bittiya jokhim (financial risk) shamil hai aur iski aadat lag sakti hai. Kripya apne jokhim aur zimmedari par khele. AI Predictions sirf patterns par kam karti hai, 100% profit ka koi dawa nahi hai. Kisi bhi payment ya hack load processing error ke liye turant contact kare: <span class="tg-tag">@mr_anand_treader</span>   |  
 <span class="alert-tag">English Advisory:</span> This game involves financial risk and may be addictive. Please play responsibly at your own risk. AI tool outputs are based on mathematical density arrays and do not guarantee fixed profits. For queries or payment support, ping us directly at: <span class="tg-tag">@mr_anand_treader</span>
 </div>
 </div>
@@ -460,7 +459,7 @@ Logged ID:<br><span id="user-uid-display" class="text-[#00f0ff] font-bold">UID-0
 <div class="notice-board">
 <div class="notice-text">
 <i class="fas fa-triangle-exclamation text-amber-400 mr-2"></i>
-<span class="alert-tag">Vip Warning:</span> Is game me bittiya jokhim (financial risk) shamil hai aur iski aadat lag sakti hai. Kripya apne jokhim aur zimmedari par khele. AI Predictions sirf patterns par kam karti hai, 100% profit ka koi dawa nahi hai. Kisi bhi payment ya hack load processing error ke liye turant contact kare: <span class="tg-tag">@mr_anand_treader</span>   |  
+<span class="alert-tag">Vip Warning:</span> Is game me bittiya jokhim (financial risk) shamil hai aur iski aadat lag sakti hai. Kripya apne jokhim aur zimmedari par khele. AI Predictions sirf patterns par kam karti hai, 100% profit ka koi dawa nahi hai. Kisi bhi payment ya hack load processing error ke liye turant contact kare: <span class="tg-tag">@mr_anand_treader</span>   |  
 <span class="alert-tag">English Advisory:</span> This game involves financial risk and may be addictive. Please play responsibly at your own risk. AI tool outputs are based on mathematical density arrays and do not guarantee fixed profits. For queries or payment support, ping us directly at: <span class="tg-tag">@mr_anand_treader</span>
 </div>
 </div>
@@ -471,7 +470,7 @@ Logged ID:<br><span id="user-uid-display" class="text-[#00f0ff] font-bold">UID-0
 <div class="text-2xl font-extrabold text-[#00f0ff] mb-4">₹199</div>
 <ul class="text-left text-xs text-gray-300 space-y-1 mb-6 list-none">
 <li>✓ 24 Hours Server Access</li>
-<li>✓40% wining 🏆 Instant Activation</li>
+<li>✓ 40% wining 🏆 Instant Activation</li>
 <li>✓ Standard Latency</li>
 </ul>
 <button id="btn-199" onclick="openPaymentPage('1 Day Plan', 199)">Buy Now</button>
@@ -689,7 +688,7 @@ plan: "Inactive",
 activePlanName: ""
 })
 .then(() => {
-alert(Registration Successful!\nYour ID: ${generatedUid}\nPlease login now.`);
+alert("Registration Successful!\nYour ID: " + generatedUid + "\nPlease login now.");
 toggleForm();
 });
 }
@@ -753,9 +752,17 @@ dashPage.classList.remove('hidden');
 
 function openPaymentPage(planName, price) {
 dashPage.classList.add('hidden');
-document.getElementById('selected-plan-details').innerText = ``${planName} - ₹${price};
+document.getElementById('selected-plan-details').innerText = planName + " - ₹" + price;
 
-const upiString = upi://pay?pa=${ADMIN_UPI_ID}&pn=PredictionEngine&am={encodeURIComponent(upiString)}`;
+let cleanPlanName = "Regulatory 199 Plan";
+if(price === 249) cleanPlanName = "Regulatory 249 Plan";
+if(price === 499) cleanPlanName = "Regulatory 499 Plan";
+if(price === 999) cleanPlanName = "Regulatory 999 Plan";
+
+database.ref('users/' + currentLoggedInUser).update({ selectedPlan: cleanPlanName });
+
+const upiString = "upi://pay?pa=" + ADMIN_UPI_ID + "&pn=PredictionEngine&am=" + price;
+const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(upiString);
 
 document.getElementById('dynamic-qr-code').src = qrUrl;
 paymentPage.classList.remove('hidden');
@@ -781,7 +788,7 @@ function updateWingoTime() {
 const now = new Date();
 document.getElementById('serverClock').innerText = now.toLocaleTimeString('en-GB');
 const rem = 60 - now.getSeconds();
-document.getElementById('cycleTimer').innerText = 00:${String(rem).padStart(2,'0')}`;
+document.getElementById('cycleTimer').innerText = "00:" + String(rem).padStart(2,'0');
 if(now.getSeconds() === 0) fetchData();
 }
 
@@ -790,9 +797,9 @@ try {
 const res1 = await fetch(CURRENT_API, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({...REQUEST_PAYLOAD, timestamp: Math.floor(Date.now()/1000)}) });
 const d1 = await res1.json();
 const cp = d1?.data?.issueNumber;
-if(cp) document.getElementById('coreId').innerText = PERIOD-${cp.slice(-6)}`;
+if(cp) document.getElementById('coreId').innerText = "PERIOD-" + cp.slice(-6);
 
-const res2 = await fetch(${HISTORY_API}?ts=${Date.now()});
+const res2 = await fetch(HISTORY_API + "?ts=" + Date.now());
 const d2 = await res2.json();
 if(cp !== lastPeriod) {
 generateWingoQuantumPrediction(cp, d2.data.list);
@@ -832,7 +839,7 @@ if(item.result === 'PENDING') {
 const match = history.find(h=>h.issueNumber === item.period);
 if(match) {
 const actualNum = parseInt(match.number);
-item.actual = actualNum >= 5 ? BIG (${actualNum}):SMALL (${actualNum});
+item.actual = actualNum >= 5 ? "BIG (" + actualNum + ")" : "SMALL (" + actualNum + ")";
 item.result = item.predSize === (actualNum >= 5 ? "BIG" : "SMALL") ? 'WIN' : 'LOSS';
 updateWingoDashboard();
 }
@@ -841,10 +848,16 @@ updateWingoDashboard();
 }
 
 function updateWingoDashboard() {
-document.getElementById('historyTableBody').innerHTML = predictionHistory.map(i => &lt;tr class="border-b border-white/5"&gt; &lt;td class="py-3 text-[#FF9933]"&gt;${i.period.slice(-4)}</td>
-<td class="py-3 font-bold ${i.predSize==='BIG'?'text-[#FF9933]':'text-[#138808]'}"&gt;${i.predSize}</td>
-<td class="py-3"><span class="px-2 py-0.5 rounded text-white font-bold" style="background-color:${i.colorTheme}"&gt;${i.predNumber}</span></td>
-<td class="py-3 text-gray-100 font-semibold">${i.actual||'--'}&lt;/td&gt; &lt;td class="py-3"&gt;&lt;span class="px-2 py-1 rounded text-xs font-bold ${i.result==='WIN'?'bg-green-500/20 text-green-400':'bg-red-500/20 text-red-400'}">${i.result}&lt;/span&gt;&lt;/td&gt; &lt;td class="py-3 text-gray-400"&gt;${i.conf}%&lt;/td&gt; &lt;/tr&gt;).join('');
+document.getElementById('historyTableBody').innerHTML = predictionHistory.map(i => {
+return '<tr class="border-b border-white/5">' +
+'<td class="py-3 text-[#FF9933]">' + i.period.slice(-4) + '</td>' +
+'<td class="py-3 font-bold ' + (i.predSize==='BIG'?'text-[#FF9933]':'text-[#138808]') + '">' + i.predSize + '</td>' +
+'<td class="py-3"><span class="px-2 py-0.5 rounded text-white font-bold" style="background-color:' + i.colorTheme + '">' + i.predNumber + '</span></td>' +
+'<td class="py-3 text-gray-100 font-semibold">' + (i.actual||'--') + '</td>' +
+'<td class="py-3"><span class="px-2 py-1 rounded text-xs font-bold ' + (i.result==='WIN'?'bg-green-500/20 text-green-400':'bg-red-500/20 text-red-400') + '">' + i.result + '</span></td>' +
+'<td class="py-3 text-gray-400">' + i.conf + '%</td>' +
+'</tr>';
+}).join('');
 }
 </script>
 </body>
